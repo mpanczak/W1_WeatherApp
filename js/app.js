@@ -69,3 +69,8 @@ function getDayName(stringDate) {
     let dayOfWeek = weekDayNames[date.getDay()];
     return dayOfWeek;
 }
+
+function buildImgPath(pathFromAPI) {
+    const iconPath = pathFromAPI.replace("//cdn.weatherapi.com/weather", "assets");
+    return iconPath;
+}
