@@ -8,10 +8,10 @@ fetch("http://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=auto:ip&d
 
             // current day
             //icon
-            const conditionCode = obj.current.condition.code;
-            const conditionText = obj.current.condition.text;
+            // const conditionCode = obj.current.condition.code;
+            // const conditionText = obj.current.condition.text;
             const icon = obj.current.condition.icon;
-            document.querySelector(".weather__icon").querySelector("img").setAttribute("src", "assets/icons/clear-day.svg")
+            document.querySelector(".weather__icon").querySelector("img").setAttribute("src", buildImgPath(icon));
             //temp
             document.querySelector(".temperature__value").innerText = obj.current.temp_c
             //city
