@@ -61,3 +61,11 @@ document.querySelector(".module__weather").querySelector(".btn--close").addEvent
 
 // console.log(new Date().getDay());
 // console.log(new Date("2023-08-31").getDay());
+
+
+const weekDayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+function getDayName(stringDate) {
+    const date = new Date(stringDate);
+    let dayOfWeek = weekDayNames[date.getDay()];
+    return dayOfWeek;
+}
