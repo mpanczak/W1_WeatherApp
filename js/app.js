@@ -26,15 +26,20 @@ fetch("http://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=auto:ip&d
                 const avgtempC = obj.forecast.forecastday[i].day.avgtemp_c;
                 const date = obj.forecast.forecastday[i].date;
                 const icon = obj.forecast.forecastday[i].day.condition.icon;
-                const conditionCode = obj.forecast.forecastday[i].day.condition.code;
-                const conditionText = obj.forecast.forecastday[i].day.condition.text;
+                // const conditionCode = obj.forecast.forecastday[i].day.condition.code;
+                // const conditionText = obj.forecast.forecastday[i].day.condition.text;
+
+
+
+                console.log(icon);
+                console.log(buildImgPath(icon));
             }
 
             // future days DOM objects
             const nextDays = document.querySelector(".weather__forecast").querySelectorAll("li");
             for (let i = 0; i < nextDays.length; i++) {
                 const dayName = nextDays[i].querySelector(".day").innerText;
-                const icon = nextDays[i].querySelector("img").getAttribute("src");
+                // const icon = nextDays[i].querySelector("img").setAttribute("src", iconPath);
                 const temperature = nextDays[i].querySelector(".temperature__value").innerText;
             }
 
@@ -59,7 +64,7 @@ document.querySelector(".module__weather").querySelector(".btn--close").addEvent
     document.querySelector(".module__weather").setAttribute("hidden", "");
 });
 
-// console.log(new Date().getDay());
+// console.log();
 // console.log(new Date("2023-08-31").getDay());
 
 
@@ -73,4 +78,12 @@ function getDayName(stringDate) {
 function buildImgPath(pathFromAPI) {
     const iconPath = pathFromAPI.replace("//cdn.weatherapi.com/weather", "assets");
     return iconPath;
+}
+
+class futureDay {
+    constructor(dayName, temperature, iconImg) {
+        this.dayName = dayName;
+        this.temperature = temperature;
+        this.iconImg = iconImg;
+    }
 }
