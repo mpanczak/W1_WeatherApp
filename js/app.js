@@ -53,5 +53,11 @@ document.querySelector(".module__form").querySelector(".btn--close").addEventLis
     document.querySelector(".module__form").setAttribute("hidden", "");
 });
 
+//hide weather module
+document.querySelector(".module__weather").querySelector(".btn--close").addEventListener("click", function (ev){
+    ev.preventDefault(); //TODO propagetion
+    document.querySelector(".module__weather").setAttribute("hidden", "");
+});
+
 // console.log(new Date().getDay());
 // console.log(new Date("2023-08-31").getDay());
