@@ -17,9 +17,9 @@ fetch("http://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=auto:ip&d
             //city
             document.querySelector(".city__name").innerText = obj.location.name
             //details
-            document.querySelector(".pressure__value").innerText = obj.current.pressure_mb;
-            document.querySelector(".humidity__value").innerText = obj.current.humidity
-            document.querySelector(".wind-speed__value").innerText = obj.current.wind_mph
+            document.querySelector(".pressure__value").innerText = obj.current.pressure_mb + " hPa";
+            document.querySelector(".humidity__value").innerText = obj.current.humidity + " %";
+            document.querySelector(".wind-speed__value").innerText = obj.current.wind_kph + " km/h"
 
             // furure days fetched data
             const futureDays = [];
@@ -64,9 +64,6 @@ document.querySelector(".module__weather").querySelector(".btn--close").addEvent
     ev.preventDefault(); //TODO propagetion
     document.querySelector(".module__weather").setAttribute("hidden", "");
 });
-
-// console.log();
-// console.log(new Date("2023-08-31").getDay());
 
 
 const weekDayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
