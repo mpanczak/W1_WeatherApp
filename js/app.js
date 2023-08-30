@@ -71,6 +71,10 @@ document.querySelector(".module__weather").querySelector(".btn--close").addEvent
     document.querySelector(".module__weather").setAttribute("hidden", "");
 });
 
+document.querySelector("form").addEventListener("click", function (ev) {
+    ev.preventDefault();
+    //TODO fetch and show anotcher module
+});
 
 const weekDayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 function getDayName(stringDate) {
