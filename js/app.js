@@ -67,8 +67,8 @@ document.querySelector(".module__form").querySelector(".btn--close").addEventLis
 
 //hide weather module
 document.querySelector(".module__weather").querySelector(".btn--close").addEventListener("click", function (ev){
-    ev.preventDefault(); //TODO propagetion
-    document.querySelector(".module__weather").setAttribute("hidden", "");
+    ev.preventDefault();
+    ev.currentTarget.parentElement.setAttribute("hidden", "");
 });
 
 document.querySelector("form").addEventListener("click", function (ev) {
