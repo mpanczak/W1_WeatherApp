@@ -1,5 +1,6 @@
 const apiKey = "e07d5dbab7644d46beb153206232608";
 const weekDayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const body = document.querySelector("body");
 class futureDay {
     constructor(dayName, temperature, iconImg) {
         this.dayName = dayName;
@@ -39,6 +40,8 @@ document.querySelector("form").addEventListener("click", function (ev) {
 
 ///////////////////// functions
 function fetchData(city = "auto:ip"){
+
+    body.className = "loading";
 
     fetch("http://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=" + city + "&days=5")
         .then(resp => resp.json()
@@ -83,6 +86,8 @@ function fetchData(city = "auto:ip"){
                     const icon = nextDays[i].querySelector("img").setAttribute("src", futureDays[i].iconImg);
                     const temperature = nextDays[i].querySelector(".temperature__value").innerText = futureDays[i].temperature;
                 }
+
+                body.classList.remove("loading");
 
             }))
         .catch(err => console.error(err));
