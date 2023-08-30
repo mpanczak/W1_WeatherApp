@@ -1,6 +1,42 @@
 const apiKey = "e07d5dbab7644d46beb153206232608";
+const weekDayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+class futureDay {
+    constructor(dayName, temperature, iconImg) {
+        this.dayName = dayName;
+        this.temperature = temperature;
+        this.iconImg = iconImg;
+    }
+}
 
 
+fetchData();
+
+// show search module
+document.getElementById("add-city").addEventListener("click", function (ev){
+    ev.preventDefault();
+    document.querySelector(".module__form").removeAttribute("hidden");
+});
+
+// hide search module
+document.querySelector(".module__form").querySelector(".btn--close").addEventListener("click", function (ev){
+    ev.preventDefault();
+    document.querySelector(".module__form").setAttribute("hidden", "");
+});
+
+//hide weather module
+document.querySelector(".module__weather").querySelector(".btn--close").addEventListener("click", function (ev){
+    ev.preventDefault();
+    ev.currentTarget.parentElement.setAttribute("hidden", "");
+});
+
+document.querySelector("form").addEventListener("click", function (ev) {
+    ev.preventDefault();
+    //TODO fetch and show anotcher module
+});
+
+
+
+///////////////////// functions
 function fetchData(city = "auto:ip"){
 
     fetch("http://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=" + city + "&days=5")
@@ -51,32 +87,7 @@ function fetchData(city = "auto:ip"){
         .catch(err => console.error(err));
 }
 
-fetchData();
 
-// show search module
-document.getElementById("add-city").addEventListener("click", function (ev){
-    ev.preventDefault();
-    document.querySelector(".module__form").removeAttribute("hidden");
-});
-
-// hide search module
-document.querySelector(".module__form").querySelector(".btn--close").addEventListener("click", function (ev){
-    ev.preventDefault();
-    document.querySelector(".module__form").setAttribute("hidden", "");
-});
-
-//hide weather module
-document.querySelector(".module__weather").querySelector(".btn--close").addEventListener("click", function (ev){
-    ev.preventDefault();
-    ev.currentTarget.parentElement.setAttribute("hidden", "");
-});
-
-document.querySelector("form").addEventListener("click", function (ev) {
-    ev.preventDefault();
-    //TODO fetch and show anotcher module
-});
-
-const weekDayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 function getDayName(stringDate) {
     const date = new Date(stringDate);
     let dayOfWeek = weekDayNames[date.getDay()];
@@ -88,10 +99,3 @@ function buildImgPath(pathFromAPI) {
     return iconPath;
 }
 
-class futureDay {
-    constructor(dayName, temperature, iconImg) {
-        this.dayName = dayName;
-        this.temperature = temperature;
-        this.iconImg = iconImg;
-    }
-}
