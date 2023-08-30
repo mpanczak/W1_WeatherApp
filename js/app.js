@@ -1,51 +1,57 @@
 const apiKey = "e07d5dbab7644d46beb153206232608";
-fetch("http://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=auto:ip&days=5")
-    .then(resp => resp.json()
-        .then(obj => {
 
-            //show module
-            document.querySelector(".module__weather").removeAttribute("hidden");
 
-            // current day
-            //icon
-            // const conditionCode = obj.current.condition.code;
-            // const conditionText = obj.current.condition.text;
-            const icon = obj.current.condition.icon;
-            document.querySelector(".weather__icon").querySelector("img").setAttribute("src", buildImgPath(icon));
-            //temp
-            document.querySelector(".temperature__value").innerText = obj.current.temp_c
-            //city
-            document.querySelector(".city__name").innerText = obj.location.name
-            //details
-            document.querySelector(".pressure__value").innerText = obj.current.pressure_mb + " hPa";
-            document.querySelector(".humidity__value").innerText = obj.current.humidity + " %";
-            document.querySelector(".wind-speed__value").innerText = obj.current.wind_kph + " km/h"
+function fetchData(city = "auto:ip"){
 
-            // furure days fetched data
-            const futureDays = [];
+    fetch("http://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=" + city + "&days=5")
+        .then(resp => resp.json()
+            .then(obj => {
 
-            for (let i = 0; i < obj.forecast.forecastday.length; i++) {
-                // const avgtempC = obj.forecast.forecastday[i].day.avgtemp_c;
-                const maxtempC = obj.forecast.forecastday[i].day.maxtemp_c;
-                const date = obj.forecast.forecastday[i].date;
-                const icon = obj.forecast.forecastday[i].day.condition.icon;
-                // const conditionCode = obj.forecast.forecastday[i].day.condition.code;
-                // const conditionText = obj.forecast.forecastday[i].day.condition.text;
+                //show module
+                document.querySelector(".module__weather").removeAttribute("hidden");
 
-                const day = new futureDay(getDayName(date), maxtempC, buildImgPath(icon));
-                futureDays.push(day);
-            }
+                // current day
+                //icon
+                // const conditionCode = obj.current.condition.code;
+                // const conditionText = obj.current.condition.text;
+                const icon = obj.current.condition.icon;
+                document.querySelector(".weather__icon").querySelector("img").setAttribute("src", buildImgPath(icon));
+                //temp
+                document.querySelector(".temperature__value").innerText = obj.current.temp_c
+                //city
+                document.querySelector(".city__name").innerText = obj.location.name
+                //details
+                document.querySelector(".pressure__value").innerText = obj.current.pressure_mb + " hPa";
+                document.querySelector(".humidity__value").innerText = obj.current.humidity + " %";
+                document.querySelector(".wind-speed__value").innerText = obj.current.wind_kph + " km/h"
 
-            // future days DOM objects
-            const nextDays = document.querySelector(".weather__forecast").querySelectorAll("li");
-            for (let i = 0; i < nextDays.length; i++) {
-                const dayName = nextDays[i].querySelector(".day").innerText = futureDays[i].dayName;
-                const icon = nextDays[i].querySelector("img").setAttribute("src", futureDays[i].iconImg);
-                const temperature = nextDays[i].querySelector(".temperature__value").innerText = futureDays[i].temperature;
-            }
+                // furure days fetched data
+                const futureDays = [];
 
-        }))
-    .catch(err => console.error(err));
+                for (let i = 0; i < obj.forecast.forecastday.length; i++) {
+                    const maxtempC = obj.forecast.forecastday[i].day.maxtemp_c;
+                    const date = obj.forecast.forecastday[i].date;
+                    const icon = obj.forecast.forecastday[i].day.condition.icon;
+                    // const conditionCode = obj.forecast.forecastday[i].day.condition.code;
+                    // const conditionText = obj.forecast.forecastday[i].day.condition.text;
+
+                    const day = new futureDay(getDayName(date), maxtempC, buildImgPath(icon));
+                    futureDays.push(day);
+                }
+
+                // future days DOM objects
+                const nextDays = document.querySelector(".weather__forecast").querySelectorAll("li");
+                for (let i = 0; i < nextDays.length; i++) {
+                    const dayName = nextDays[i].querySelector(".day").innerText = futureDays[i].dayName;
+                    const icon = nextDays[i].querySelector("img").setAttribute("src", futureDays[i].iconImg);
+                    const temperature = nextDays[i].querySelector(".temperature__value").innerText = futureDays[i].temperature;
+                }
+
+            }))
+        .catch(err => console.error(err));
+}
+
+fetchData();
 
 // show search module
 document.getElementById("add-city").addEventListener("click", function (ev){
