@@ -8,8 +8,9 @@ class futureDay {
     }
 }
 
-
-fetchData();
+document.addEventListener("DOMContentLoaded", function (){
+    fetchData();
+});
 
 // show search module
 document.getElementById("add-city").addEventListener("click", function (ev){
