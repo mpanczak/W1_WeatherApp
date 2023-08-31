@@ -10,8 +10,8 @@ class futureDay {
 }
 
 document.addEventListener("DOMContentLoaded", function (){
-    // const container = document.querySelector(".container");
-    // const firstCity = container.querySelector(".module__weather");
+
+    body.className = "loading";
     fetchData().then(function (response){
         renderModule(response);
     });
@@ -53,19 +53,22 @@ function fetchData(city = "auto:ip"){
             return resp.json();
         });
 }
-function renderModule(obj) {  //show module
-    document.querySelector(".module__weather").removeAttribute("hidden");
+function renderModule(obj) {
+    const container = document.querySelector("section.container");
+    const firstCity = container.querySelector(".module__weather");
+    const newCity = firstCity.cloneNode(true);
+    container.appendChild(newCity);
 
     const icon = obj.current.condition.icon;
-    document.querySelector(".weather__icon").querySelector("img").setAttribute("src", buildImgPath(icon));
+    newCity.querySelector(".weather__icon").querySelector("img").setAttribute("src", buildImgPath(icon));
     //temp
-    document.querySelector(".temperature__value").innerText = obj.current.temp_c
+    newCity.querySelector(".temperature__value").innerText = obj.current.temp_c
     //city
-    document.querySelector(".city__name").innerText = obj.location.name
+    newCity.querySelector(".city__name").innerText = obj.location.name
     //details
-    document.querySelector(".pressure__value").innerText = obj.current.pressure_mb + " hPa";
-    document.querySelector(".humidity__value").innerText = obj.current.humidity + " %";
-    document.querySelector(".wind-speed__value").innerText = obj.current.wind_kph + " km/h"
+    newCity.querySelector(".pressure__value").innerText = obj.current.pressure_mb + " hPa";
+    newCity.querySelector(".humidity__value").innerText = obj.current.humidity + " %";
+    newCity.querySelector(".wind-speed__value").innerText = obj.current.wind_kph + " km/h"
 
     // furure days fetched data
     const futureDays = [];
@@ -82,7 +85,7 @@ function renderModule(obj) {  //show module
     }
 
     // future days DOM objects
-    const nextDays = document.querySelector(".weather__forecast").querySelectorAll("li");
+    const nextDays = newCity.querySelector(".weather__forecast").querySelectorAll("li");
     for (let i = 0; i < nextDays.length; i++) {
         const dayName = nextDays[i].querySelector(".day").innerText = futureDays[i].dayName;
         const icon = nextDays[i].querySelector("img").setAttribute("src", futureDays[i].iconImg);
@@ -90,6 +93,7 @@ function renderModule(obj) {  //show module
     }
 
     body.classList.remove("loading");
+    newCity.removeAttribute("hidden");
 }
 
 function getDayName(stringDate) {
