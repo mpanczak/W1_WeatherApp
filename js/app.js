@@ -18,27 +18,27 @@ document.addEventListener("DOMContentLoaded", function (){
 });
 
 // show search module
-// document.getElementById("add-city").addEventListener("click", function (ev){
-//     ev.preventDefault();
-//     document.querySelector(".module__form").removeAttribute("hidden");
-// });
-//
-// // hide search module
-// document.querySelector(".module__form").querySelector(".btn--close").addEventListener("click", function (ev){
-//     ev.preventDefault();
-//     document.querySelector(".module__form").setAttribute("hidden", "");
-// });
-//
-// //hide weather module
-// document.querySelector(".module__weather").querySelector(".btn--close").addEventListener("click", function (ev){
-//     ev.preventDefault();
-//     ev.currentTarget.parentElement.setAttribute("hidden", "");
-// });
-//
-// document.querySelector("form").addEventListener("click", function (ev) {
-//     ev.preventDefault();
-//     //TODO fetch and show anotcher module
-// });
+document.getElementById("add-city").addEventListener("click", function (ev){
+    ev.preventDefault();
+    document.querySelector(".module__form").removeAttribute("hidden");
+});
+
+// hide search module
+document.querySelector(".module__form").querySelector(".btn--close").addEventListener("click", function (ev){
+    ev.preventDefault();
+    document.querySelector(".module__form").setAttribute("hidden", "");
+});
+
+//hide weather module
+document.querySelector(".module__weather").querySelector(".btn--close").addEventListener("click", function (ev){
+    ev.preventDefault();
+    ev.currentTarget.parentElement.setAttribute("hidden", "");
+});
+
+document.querySelector("form").addEventListener("click", function (ev) {
+    ev.preventDefault();
+    //TODO fetch and show anotcher module
+});
 
 
 ///////////////////// functions
